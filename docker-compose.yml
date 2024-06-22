@@ -1,0 +1,16 @@
+services:
+  database:
+    build: ./database
+    volumes:
+      - ./database/database.sql:/docker-entrypoint-initdb.d/database.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: cases123
+      MYSQL_DATABASE: case_studies
+      MYSQL_PASSWORD: cases123
+
+  webapp:
+    build: ./webapp
+    ports:
+      - '80:80'
+    depends_on:
+      - database
